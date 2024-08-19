@@ -1,8 +1,8 @@
-// require('dotenv').config();
+require('dotenv').config();
 const express = require('express')
 const app = express()
 const port = 8080
-// const db = require('./db')
+const db = require('./db')
 
 app.use(express.json())
 
@@ -24,7 +24,7 @@ app.post('/api/submit', async (req, res) => {
 
   try {
     await db.query(
-      'INSERT INTO test (first_name, last_name, email, phone_number, message) VALUES ($1, $2, $3, $4, $5)',
+      'INSERT INTO contacts (first_name, last_name, email, phone_number, message) VALUES ($1, $2, $3, $4, $5)',
       [firstName, lastName, email, phone, message]
     )
     res.status(200).json({message: 'form submitted'})
