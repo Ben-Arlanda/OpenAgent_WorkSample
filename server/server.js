@@ -8,6 +8,9 @@ app.use(express.json())
 
 app.use(express.urlencoded({ extended: true }));
 
+const cors = require('cors');
+app.use(cors());
+
 app.get('/api/contact', (req, res) => {
   res.json({
         header: "Get in touch, we would love to connect!",
