@@ -1,6 +1,12 @@
 # Overview
 
-This is a full-stack web application consisting of a client-side React application and a server-side Express application. It allows users to submit contact information through a form, which is then saved in a PostgreSQL database. The application also provides contact information through an API.
+This is a full-stack web application consisting of a client-side React application and a server-side Express application. It allows users to submit contact information through a form, which is then saved in a PostgreSQL database. The application provides company contact information through an API. I decided to use Tailwind UI for the frontend to make the design process quicker and allow more focus on the API development.
+
+### Technologies
+
+React
+Node, Express
+Tailwind
 
 # Getting Started
 
