@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { BuildingOffice2Icon, EnvelopeIcon, PhoneIcon, ClockIcon} from '@heroicons/react/24/outline'
+import { useNavigate } from 'react-router-dom';
 
 const ContactForm = () => {
   const [contactData, setContactData] = useState({})
@@ -9,6 +10,7 @@ const ContactForm = () => {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -23,10 +25,9 @@ const ContactForm = () => {
       });
 
       if (response.status === 200) {
-        console.log('form submitted');
+        navigate('/Thankyou')
       }
     } catch (error) {
-      console.log('error submitting form');
     }
   };
 
