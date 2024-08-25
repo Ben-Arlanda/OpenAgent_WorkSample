@@ -13,7 +13,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 
 
-app.get('/api/contact', (req, res) => {
+app.get(process.env.API_URL_CONTACT, (req, res) => {
   res.json({
         header: "Get in touch, we would love to connect!",
         body: "Welcome to OpenAgent. We've been around since 2013, and our vision is to make it easy for people to buy, sell, and own property.",
@@ -24,7 +24,7 @@ app.get('/api/contact', (req, res) => {
   })
 })
 
-app.post('/api/submit', async (req, res) => {
+app.post(process.env.API_URL_SUBMIT, async (req, res) => {
   const { firstName, lastName, email, phone, message } = req.body;
 
   try {

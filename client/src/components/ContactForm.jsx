@@ -12,11 +12,14 @@ const ContactForm = () => {
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
+  const apiContact = process.env.REACT_APP_API_URL_CONTACT;
+  const apiSubmit = process.env.REACT_APP_API_URL_SUBMIT;
+
   const handleSubmit = async (e) => {
     e.preventDefault()
 
     try {
-      const response = await axios.post('http://localhost:8080/api/submit', {
+      const response = await axios.post(apiSubmit, {
         firstName,
         lastName,
         email,
@@ -34,14 +37,15 @@ const ContactForm = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/api/contact')
+        console.log('API Contact URL:', apiContact);
+        const response = await axios.get(apiContact);
         setContactData(response.data)
       } catch (error) {
         console.log('error fetching contact data:', error);
       }
     }
     fetchData()
-  }, []);
+  }, [apiContact]);
 
       return (
     <div className="relative isolate bg-white">
