@@ -1,5 +1,6 @@
 const express = require('express')
 const cors = require('cors');
+const { body, validationResult } = require('express-validator');
 require('dotenv').config();
 
 const app = express()
@@ -24,8 +25,25 @@ app.get(process.env.API_URL_CONTACT, (req, res) => {
   })
 })
 
-app.post(process.env.API_URL_SUBMIT, async (req, res) => {
+app.post(process.env.API_URL_SUBMIT,
+  [
+    body('firstName').trim().notEmpty().withMessage('First name is required'),
+    body('lastName').trim().notEmpty().withMessage('Last name is required'),
+    body('email').isEmail().withMessage('Invalid email address').normalizeEmail(),
+    body('phone').optional().trim().isMobilePhone().withMessage('Invalid phone number'),
+    body('message').optional().trim().escape(),
+  ],
+
+  async (req, res) => {
+
+  const errors = validationResult(req)
+
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() })
+  }
+
   const { firstName, lastName, email, phone, message } = req.body;
+
 
   try {
     await db.query(
