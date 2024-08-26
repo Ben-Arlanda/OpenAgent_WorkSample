@@ -5,27 +5,15 @@ import { useForm } from 'react-hook-form'
 import Input from './Input';
 
 const Form = () => {
-
-const [firstName, setFirstName] = useState('');
-const [lastName, setLastName] = useState('');
-const [email, setEmail] = useState('');
-const [phone, setPhone] = useState('');
-const [message, setMessage] = useState('');
+const { register, handleSubmit, formState: { errors } } = useForm();
 const navigate = useNavigate();
 
 const apiSubmit = process.env.REACT_APP_API_URL_SUBMIT;
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+  const onSubmit = async (data) => {
 
     try {
-      const response = await axios.post(apiSubmit, {
-        firstName,
-        lastName,
-        email,
-        phone,
-        message
-      });
+      const response = await axios.post(apiSubmit, data)
 
       if (response.status === 200) {
         navigate('/Thankyou')
@@ -35,7 +23,7 @@ const apiSubmit = process.env.REACT_APP_API_URL_SUBMIT;
   };
 
   return (
-          <form onSubmit={handleSubmit} method="POST" className="px-6 pb-24 pt-20 sm:pb-32 lg:px-8 lg:py-48">
+          <form onSubmit={handleSubmit(onSubmit)} method="POST" className="px-6 pb-24 pt-20 sm:pb-32 lg:px-8 lg:py-48">
           <div className="mx-auto max-w-xl lg:mr-0 lg:max-w-lg">
             <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
               <div>
@@ -47,10 +35,9 @@ const apiSubmit = process.env.REACT_APP_API_URL_SUBMIT;
                     id="first-name"
                     name="first-name"
                     type="text"
-                    autoComplete="given-name"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
+                    {...register('firstName', {required: true})}
                   />
+                  {errors.firstName && <span className="text-red-500 text-sm">First name is required</span>}
                 </div>
               </div>
               <div>
@@ -63,9 +50,9 @@ const apiSubmit = process.env.REACT_APP_API_URL_SUBMIT;
                     name="last-name"
                     type="text"
                     autoComplete="given-name"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
+                    {...register('lastName', {required: true})}
                   />
+                  {errors.lastName && <span className="text-red-500 text-sm">Last name is required</span>}
                 </div>
               </div>
               <div className="sm:col-span-2">
@@ -77,10 +64,16 @@ const apiSubmit = process.env.REACT_APP_API_URL_SUBMIT;
                     id="email"
                     name="email"
                     type="text"
-                    autoComplete="given-name"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    autoComplete="email"
+                    {...register('email',
+                      {required: 'Email is required',
+                       pattern: {
+                         value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                         message: 'Invalid email address',
+                       },
+                      })}
                   />
+                  {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
                 </div>
               </div>
               <div className="sm:col-span-2">
@@ -93,9 +86,9 @@ const apiSubmit = process.env.REACT_APP_API_URL_SUBMIT;
                     name="phone-number"
                     type="tel"
                     autoComplete="tel"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
+                    {...register('phone', {required: true})}
                   />
+                  {errors.phone && <span className="text-red-500 text-sm">Phone is required</span>}
                 </div>
               </div>
               <div className="sm:col-span-2">
@@ -107,10 +100,11 @@ const apiSubmit = process.env.REACT_APP_API_URL_SUBMIT;
                     id="message"
                     name="message"
                     rows={4}
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
+                    {...register('message', {required: true})}
+
                     className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                   />
+                  {errors.message && <span className="text-red-500 text-sm">Message is required</span>}
                 </div>
               </div>
             </div>
