@@ -23,7 +23,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 Open [http://localhost:8080](http://localhost:8080) for server.
 
-### `create .env` DATABASE_URL=postgresql://localhost:5432/contact_form
+### `create .env` 
 
 ## Assumptions
 
