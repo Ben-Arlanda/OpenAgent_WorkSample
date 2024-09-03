@@ -6,5 +6,7 @@ CREATE TABLE contacts (
     last_name VARCHAR(255),
     email VARCHAR(255),
     phone_number VARCHAR(20),
-    message TEXT
+    message TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

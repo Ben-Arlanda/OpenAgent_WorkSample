@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { BuildingOffice2Icon, EnvelopeIcon, PhoneIcon, ClockIcon} from '@heroicons/react/24/outline'
+import { BuildingOffice2Icon, EnvelopeIcon, PhoneIcon, ClockIcon } from '@heroicons/react/24/outline'
 import Form from './Form';
 
 const ContactDetails = () => {
@@ -51,7 +51,7 @@ const ContactDetails = () => {
             </div>
             <h2 className="text-3xl font-bold tracking-tight text-gray-900">{contactData.header}</h2>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-            {contactData.body}
+              {contactData.body}
             </p>
             <dl className="mt-10 space-y-4 text-base leading-7 text-gray-600">
               <div className="flex gap-x-4">
@@ -85,7 +85,7 @@ const ContactDetails = () => {
                   </a>
                 </dd>
               </div>
-                           <div className="flex gap-x-4">
+              <div className="flex gap-x-4">
                 <dt className="flex-none">
                   <span className="sr-only">Business Hours</span>
                   <ClockIcon aria-hidden="true" className="h-7 w-6 text-gray-400" />
@@ -102,7 +102,7 @@ const ContactDetails = () => {
         <Form />
       </div>
     </div>
-    );
+  );
 }
 
 export default ContactDetails;
