@@ -18,6 +18,8 @@ const Form = () => {
 
       if (response.status === 200) {
         navigate('/Thankyou')
+        console.log('submitted');
+
       }
     } catch (error) {
     }
